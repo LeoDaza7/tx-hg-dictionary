@@ -5,6 +5,7 @@ class WordsController < ApplicationController
   # GET /words.json
   def index
     @words = Word.all
+    @word = Word.new
   end
 
   # GET /words/1
