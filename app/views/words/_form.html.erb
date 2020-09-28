@@ -1,27 +1,14 @@
-<%= form_with(model: word, local: true) do |form| %>
-  <% if word.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(word.errors.count, "error") %> prohibited this word from being saved:</h2>
-
-      <ul>
-        <% word.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<%= simple_form_for(@word) do |f| %>
+  <%= f.error_notification %>
+  <div class="field">
+    <div class="control">
+      <%= f.input :name, 
+        label: "Search Word",
+        input_html: { class: "textfield" },
+        wrapper: false,
+        label_html: { class: "label" },
+        placeholder: "Enter Word"%>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :definition %>
-    <%= form.text_area :definition %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= f.button :submit, class: "button is-primary" %>
 <% end %>
