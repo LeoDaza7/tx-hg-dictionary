@@ -30,6 +30,8 @@ gem 'bulma-rails', '~> 0.9.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
 # Makes http fun! Also, makes consuming restful web services dead easy.
 gem 'httparty', '~> 0.13.7'
+# Simple, Heroku-friendly Rails app configuration using ENV and a single YAML file
+gem 'figaro', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
