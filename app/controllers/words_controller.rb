@@ -26,14 +26,13 @@ class WordsController < ApplicationController
   # POST /words.json
   def create
     @word = Word.new(word_params)
-    @word.definition = http_request(@word.name)
+    @word.definition = ServiceObject::HttpRequestService.http_get_request(@word.name)
     respond_to do |format|
-      if @word.save
+      if @word.save and @word.definition != "Not found"
         format.html { redirect_to root_path, notice: 'Word was found.' }
         format.json { render :show, status: :created, location: @word }
       else
-        format.html { render :new }
-        format.json { render json: @word.errors, status: :unprocessable_entity }
+        format.html { redirect_to root_path, alert: 'Word not found.' }
       end
     end
   end
@@ -72,18 +71,4 @@ class WordsController < ApplicationController
     def word_params
       params.require(:word).permit(:name, :definition).with_defaults(definition: "default definition.")
     end
-
-    def http_request(word)
-      headers = { 
-        "app_id" => ENV["APP_ID"],
-        "app_key" => ENV["APP_KEY"]
-      }    
-      response = HTTParty.get(
-        "https://od-api.oxforddictionaries.com/api/v2/words/en-gb?q=" + word,
-        :headers => headers
-      )
-      hash = JSON.parse(response.body)
-      return hash['results'][0]['lexicalEntries'][0]['entries'][0]['senses'][0]['definitions'][0]
-    end
-    
 end
