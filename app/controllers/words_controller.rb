@@ -4,7 +4,7 @@ class WordsController < ApplicationController
   # GET /words
   # GET /words.json
   def index
-    @words = Word.all
+    @words = Word.limit(5).all.order("created_at DESC")
     @word = Word.new
   end
 
@@ -26,10 +26,10 @@ class WordsController < ApplicationController
   # POST /words.json
   def create
     @word = Word.new(word_params)
-
+    @word.definition = http_request(@word.name)
     respond_to do |format|
       if @word.save
-        format.html { redirect_to @word, notice: 'Word was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Word was found.' }
         format.json { render :show, status: :created, location: @word }
       else
         format.html { render :new }
@@ -70,6 +70,11 @@ class WordsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def word_params
-      params.require(:word).permit(:name, :definition)
+      params.require(:word).permit(:name, :definition).with_defaults(definition: "default definition.")
     end
+
+    def http_request(word)
+      return word
+    end
+    
 end
