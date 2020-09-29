@@ -26,13 +26,14 @@ class WordsController < ApplicationController
   # POST /words.json
   def create
     @word = Word.new(word_params)
-    @word.definition = ServiceObject::HttpRequestService.http_get_request(@word.name)
+    result = ServiceObject::HttpRequestService.http_get_request(@word.name)
+    @word.definition = result["definition"]
     respond_to do |format|
-      if @word.save and @word.definition != "Not found"
-        format.html { redirect_to root_path, notice: 'Word was found.' }
+      if @word.save and result["status_code"] == 200
+        format.html { redirect_to root_path, notice: result["message"] }
         format.json { render :show, status: :created, location: @word }
       else
-        format.html { redirect_to root_path, alert: 'Word not found.' }
+        format.html { redirect_to root_path, alert: result["message"] }
       end
     end
   end
