@@ -13,28 +13,24 @@ This is a Ruby on Rails application to interface the oxford dictionary and its p
 
 After cloning the repository it is required a couple of steps before running the application:
 
-Run:
-
-```terminal
-bundle install
-```
-
-and(if required):
-
-```terminal
-rails db:create
-```
-
-```terminal
-rails db:migrate
-```
-
-Then create a file inside of the `/config` folder, the file should be named `application.yml` and it will be used as an environment file, this file will contain 2 authentication keys to be able to make http request to [The oxford dictionary API](https://developer.oxforddictionaries.com/documentation), the keys will be provided via email.
+Create a file inside of the `/config` folder, the file should be named `application.yml` and it will be used as an environment file, this file will contain 2 authentication keys to be able to make http request to [The oxford dictionary API](https://developer.oxforddictionaries.com/documentation), the keys will be provided via email.
 
 
 ## Deployment ##
 
 To run the application execute:
+
+```terminal
+bundle install
+```
+
+and:
+
+```terminal
+rails db:migrate
+```
+
+then:
 
 ```terminal
 rails s
@@ -56,4 +52,4 @@ gem 'figaro', '~> 1.2'
   gem 'better_errors', '~> 2.8', '>= 2.8.1'
 ### Guard::LiveReload automatically reloads your browser when 'view' files are modified.
 gem 'guard', '~> 2.16', '>= 2.16.2'
-gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
+gem 'guard-livereload', '~> 2.5', '>= 2.5.2'
