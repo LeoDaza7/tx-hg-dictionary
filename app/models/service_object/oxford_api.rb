@@ -1,5 +1,5 @@
-class ServiceObject::HttpRequestService
-  def self.http_get_request(word)
+class ServiceObject::OxfordApi
+  def self.get_definition(word)
     result = {
       "status_code" => 0,
       "definition" => "N/A",

@@ -26,7 +26,7 @@ class WordsController < ApplicationController
   # POST /words.json
   def create
     @word = Word.new(word_params)
-    result = ServiceObject::HttpRequestService.http_get_request(@word.name)
+    result = ServiceObject::OxfordApi.get_definition(@word.name)
     @word.definition = result["definition"]
     respond_to do |format|
       if @word.save and result["status_code"] == 200
