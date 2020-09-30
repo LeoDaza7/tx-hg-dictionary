@@ -26,6 +26,7 @@ class WordsController < ApplicationController
   # POST /words.json
   def create
     @word = Word.new(word_params)
+    # Using service object to maintain thin controllers and models approach
     result = ServiceObject::OxfordApi.get_definition(@word.name)
     @word.definition = result["definition"]
     respond_to do |format|
