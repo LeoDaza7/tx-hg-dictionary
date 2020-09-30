@@ -1,0 +1,16 @@
+<div class="row">
+  <% @words.each do |word| %>
+    <article class="media">
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong><%= word.name %></strong>
+            <br>
+            <%= word.definition %>
+          </p>
+        </div>
+      </div>
+    </article>
+  <% end %>
+</div>
+
