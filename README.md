@@ -1,6 +1,6 @@
-# README #
+# Oxford dictionary interface #
 
-This is a Ruby on Rails application to interface the oxford dictionary and its purpose is to search a definition of an english(great britain) word.
+This is a Ruby on Rails application to interface the oxford dictionary API and its purpose is to search a definition of an english(great britain) word.
 
 ## About this project ##
 
